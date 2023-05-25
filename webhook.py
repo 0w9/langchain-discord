@@ -13,10 +13,8 @@ class DiscordWebhookTool(BaseTool):
     description = "useful for when you need to send a webhook message"
 
     def _run(self, webhook_message: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> str:
-        if(os.environ.get("WEBHOOK_URL") is None):
-            raise ValueError("WEBHOOK_URL environment variable not set")
-        if(os.environ.get("WEBHOOK_URL") is None):
-            raise ValueError("WEBHOOK_URL environment variable not set")
+        if(os.environ.get("WEBHOOK_URL") is None): raise ValueError("WEBHOOK_URL environment variable not set")
+        if(os.environ.get("WEBHOOK_URL") is None): raise ValueError("WEBHOOK_URL environment variable not set")
         
         WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
         WEBHOOK_USERNAME = os.environ.get("WEBHOOK_USERNAME", "LangChain Agent")
