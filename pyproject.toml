@@ -1,6 +1,6 @@
 [project]
-name = "Langchain Discord"
-version = "0.0.1"
+name = "langchain_discord"
+version = "0.0.6"
 authors = [
   { name="Lennard Dorst", email="lennardsolana@gmail.com" },
 ]

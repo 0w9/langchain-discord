@@ -1,12 +1,12 @@
-from langchain import LLMMathChain, SerpAPIWrapper
-from langchain.agents import AgentType, initialize_agent
-from langchain.chat_models import ChatOpenAI
-from typing import Optional, Type
-from dhooks import Webhook
-
-from langchain.callbacks.manager import AsyncCallbackManagerForToolRun, CallbackManagerForToolRun
-from langchain.tools import BaseTool, StructuredTool, Tool, tool
+from typing import Optional
+from langchain.callbacks.manager import CallbackManagerForToolRun
+from langchain.tools import BaseTool, Field
 import requests, os
+
+class DiscordWebhookInput(BaseTool):
+    webhook_url: str = Field()
+    webhook_username: str = Field()
+    webhook_content: str = Field()
 
 class DiscordWebhookTool(BaseTool):
     name = "discord_webhook"
@@ -28,6 +28,7 @@ class DiscordWebhookTool(BaseTool):
         )
 
         if(answer.status_code != 204 or answer.status_code != 200):
+            print(answer.json())
             raise Exception("Webhook message could not be sent! Please check your webhook URL and message and try again.")
         else:
             return "Webhook message sent successfully!"
@@ -35,13 +36,3 @@ class DiscordWebhookTool(BaseTool):
     
     def _arun(self, webhook_message: str, webhook_url: str, webhook_username: str): raise NotImplementedError("This tool does not support async")
 
-tools = [DiscordWebhookTool()]
-
-llm = ChatOpenAI(temperature=0)
-
-os.environ["WEBHOOK_URL"] = "https://discord.com/api/webhooks/<...>"
-os.environ["WEBHOOK_USERNAME"] = "LangChain Agent"
-
-agent = initialize_agent(tools, llm, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
-
-agent.run("Send a webhook message with a short poem")

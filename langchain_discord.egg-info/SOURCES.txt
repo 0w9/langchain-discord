@@ -1,0 +1,13 @@
+LICENSE.txt
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+.vscode/settings.json
+langchain_discord/__init__.py
+langchain_discord/webhook.py
+langchain_discord.egg-info/PKG-INFO
+langchain_discord.egg-info/SOURCES.txt
+langchain_discord.egg-info/dependency_links.txt
+langchain_discord.egg-info/requires.txt
+langchain_discord.egg-info/top_level.txt
