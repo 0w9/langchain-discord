@@ -6,27 +6,26 @@ from typing import Optional, Type
 import requests, os
 from typing import Any, Dict
 from pydantic import BaseModel, Field, root_validator
+from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 
-
-class DiscordWebhookInput(BaseModel):
-    webhook_message: Dict = Field(...)
-
-    @root_validator
-    def validate_query(cls, values: Dict[str, Any]) -> Dict:
-
-        return values
-    
-        # ignore for now
-        if "webhook_message" not in values:
-            raise ValueError("webhook_message is required")
-        if not isinstance(values["webhook_message"]["value"], str):
-            raise ValueError("webhook_message must be a string")
+#class DiscordWebhookInput(BaseModel):
+#    webhook_message: str = Field(description="The message you want to send to the webhook")
+#
+#    @root_validator
+#    def validate_query(cls, values: Dict[str, Any]) -> Dict:
+#
+#        if "webhook_message" not in values:
+#            raise ValueError("webhook_message is required")
+#        if not isinstance(values["webhook_message"], str):
+#            raise ValueError("webhook_message must be a string")
+#
+#        return values
         
 
 class DiscordWebhookTool(BaseTool):
     name = "discord_webhook"
     description = "useful for when you need to send a webhook message"
-    args_schema: Type[DiscordWebhookInput] = DiscordWebhookInput
+    #args_schema: Type[DiscordWebhookInput] = DiscordWebhookInput
 
     def _run(self, webhook_message: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> str:
         if(os.environ.get("WEBHOOK_URL") is None): raise ValueError("WEBHOOK_URL environment variable not set")
