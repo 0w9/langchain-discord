@@ -9,14 +9,19 @@ from pydantic import BaseModel, Field, root_validator
 
 
 class DiscordWebhookInput(BaseModel):
-    #webhook_url: str = Field()
-    #webhook_username: str = Field()
-    webhook_message: str = Field()
+    webhook_message: Dict = Field(...)
 
     @root_validator
     def validate_query(cls, values: Dict[str, Any]) -> Dict:
-        if(not "webhook_message" in values and type(values["webhook_message"]) == str): raise ValueError("webhook_message is required and must be a string");
+
         return values
+    
+        # ignore for now
+        if "webhook_message" not in values:
+            raise ValueError("webhook_message is required")
+        if not isinstance(values["webhook_message"]["value"], str):
+            raise ValueError("webhook_message must be a string")
+        
 
 class DiscordWebhookTool(BaseTool):
     name = "discord_webhook"
@@ -32,7 +37,7 @@ class DiscordWebhookTool(BaseTool):
 
         answer = requests.post(WEBHOOK_URL, 
                       json={
-                            "content": webhook_message, 
+                            "content": webhook_message["value"], 
                             "username": WEBHOOK_USERNAME
                         }, 
                       headers={"Content-Type": "application/json"}
