@@ -1,7 +1,8 @@
 from typing import Optional
 from langchain.callbacks.manager import CallbackManagerForToolRun
 from langchain.tools import BaseTool
-from pydantic import BaseModel, Field, Type
+from pydantic import BaseModel, Field
+from typing import Optional, Type
 import requests, os
 
 class DiscordWebhookInput(BaseModel):
