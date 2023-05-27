@@ -8,6 +8,8 @@ from typing import Any, Dict
 from pydantic import BaseModel, Field, root_validator
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 
+## INFO: The following code is not used anymore, but I keep it here for reference. It is good to keep for the future when more errors are handled by the package.
+
 #class DiscordWebhookInput(BaseModel):
 #    webhook_message: str = Field(description="The message you want to send to the webhook")
 #
@@ -42,7 +44,6 @@ class DiscordWebhookTool(BaseTool):
                       headers={"Content-Type": "application/json"}
         )
 
-        print(answer.json, answer.status_code, answer.reason)
         if(answer.status_code != 204 and answer.status_code != 200):
             raise Exception("Webhook message could not be sent! Please check your webhook URL and message and try again.")
         else:
