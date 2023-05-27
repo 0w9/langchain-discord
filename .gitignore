@@ -1,2 +1,3 @@
 dist/
 langchain_discord.egg-info/
+.vscode
