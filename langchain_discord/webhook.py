@@ -27,6 +27,8 @@ from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 class DiscordWebhookTool(BaseTool):
     name = "discord_webhook"
     description = "useful for when you need to send a webhook message"
+
+    ## InFO: See above.
     #args_schema: Type[DiscordWebhookInput] = DiscordWebhookInput
 
     def _run(self, webhook_message: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> str:
