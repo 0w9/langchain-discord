@@ -43,7 +43,7 @@ class DiscordWebhookTool(BaseTool):
         )
 
         if(answer.status_code != 204 or answer.status_code != 200):
-            print(answer.json())
+            print(answer)
             raise Exception("Webhook message could not be sent! Please check your webhook URL and message and try again.")
         else:
             return "Webhook message sent successfully!"
