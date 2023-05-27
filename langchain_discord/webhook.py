@@ -36,7 +36,7 @@ class DiscordWebhookTool(BaseTool):
 
         answer = requests.post(WEBHOOK_URL, 
                       json={
-                            "content": webhook_message["value"], 
+                            "content": webhook_message, 
                             "username": WEBHOOK_USERNAME
                         }, 
                       headers={"Content-Type": "application/json"}
