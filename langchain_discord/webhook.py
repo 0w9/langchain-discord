@@ -15,7 +15,7 @@ class DiscordWebhookInput(BaseModel):
 
     @root_validator
     def validate_query(cls, values: Dict[str, Any]) -> Dict:
-        if(not "webhook_message" in values and type(values["webhook_message"]) == str): raise ValueError("webhook_message is required");
+        if(not "webhook_message" in values and type(values["webhook_message"]) == str): raise ValueError("webhook_message is required and must be a string");
         return values
 
 class DiscordWebhookTool(BaseTool):
