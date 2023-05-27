@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: langchain-discord
-Version: 0.0.6
+Version: 0.0.10
 Summary: A list of tools for LangChain to power Discord (Webhooks, etc.).
 Home-page: https://github.com/0w9/langchain-discord
 Download-URL: https://github.com/user/reponame/archive/v_01.tar.gz

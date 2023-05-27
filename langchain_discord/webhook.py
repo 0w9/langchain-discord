@@ -1,16 +1,18 @@
 from typing import Optional
 from langchain.callbacks.manager import CallbackManagerForToolRun
-from langchain.tools import BaseTool, Field
+from langchain.tools import BaseTool
+from pydantic import BaseModel, Field, Type
 import requests, os
 
-class DiscordWebhookInput(BaseTool):
-    webhook_url: str = Field()
-    webhook_username: str = Field()
-    webhook_content: str = Field()
+class DiscordWebhookInput(BaseModel):
+    #webhook_url: str = Field()
+    #webhook_username: str = Field()
+    webhook_message: str = Field()
 
 class DiscordWebhookTool(BaseTool):
     name = "discord_webhook"
     description = "useful for when you need to send a webhook message"
+    args_schema: Type[DiscordWebhookInput] = DiscordWebhookInput
 
     def _run(self, webhook_message: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> str:
         if(os.environ.get("WEBHOOK_URL") is None): raise ValueError("WEBHOOK_URL environment variable not set")
