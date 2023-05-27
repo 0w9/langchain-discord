@@ -4,11 +4,19 @@ from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
 from typing import Optional, Type
 import requests, os
+from typing import Any, Dict
+from pydantic import BaseModel, Field, root_validator
+
 
 class DiscordWebhookInput(BaseModel):
     #webhook_url: str = Field()
     #webhook_username: str = Field()
     webhook_message: str = Field()
+
+    @root_validator
+    def validate_query(cls, values: Dict[str, Any]) -> Dict:
+        if(not "webhook_message" in values and type(values["webhook_message"]) == str): raise ValueError("webhook_message is required");
+        return values
 
 class DiscordWebhookTool(BaseTool):
     name = "discord_webhook"
