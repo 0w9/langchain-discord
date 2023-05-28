@@ -1,5 +1,4 @@
 from typing import Optional
-from langchain.callbacks.manager import CallbackManagerForToolRun
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
 from typing import Optional, Type
@@ -31,7 +30,7 @@ class DiscordWebhookTool(BaseTool):
     ## InFO: See above.
     #args_schema: Type[DiscordWebhookInput] = DiscordWebhookInput
 
-    def _run(self, webhook_message: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> str:
+    def _run(self, webhook_message: str) -> str:
         if(os.environ.get("WEBHOOK_URL") is None): raise ValueError("WEBHOOK_URL environment variable not set")
         if(os.environ.get("WEBHOOK_URL") is None): raise ValueError("WEBHOOK_URL environment variable not set")
         
