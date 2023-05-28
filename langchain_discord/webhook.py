@@ -32,28 +32,26 @@ class DiscordWebhookTool(BaseTool):
     # args_schema: Type[DiscordWebhookInput] = DiscordWebhookInput
 
     def _run(self, webhook_message: str) -> str:
-        if (os.environ.get("WEBHOOK_URL") is None):
+        if os.environ.get("WEBHOOK_URL") is None:
             raise ValueError("WEBHOOK_URL environment variable not set")
-        if (os.environ.get("WEBHOOK_URL") is None):
+        if os.environ.get("WEBHOOK_URL") is None:
             raise ValueError("WEBHOOK_URL environment variable not set")
 
         WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
-        WEBHOOK_USERNAME = os.environ.get(
-            "WEBHOOK_USERNAME", "LangChain Agent")
+        WEBHOOK_USERNAME = os.environ.get("WEBHOOK_USERNAME", "LangChain Agent")
 
-        answer = requests.post(WEBHOOK_URL,
-                               json={
-                                   "content": webhook_message,
-                                   "username": WEBHOOK_USERNAME
-                               },
-                               headers={"Content-Type": "application/json"}
-                               )
+        answer = requests.post(
+            WEBHOOK_URL,
+            json={"content": webhook_message, "username": WEBHOOK_USERNAME},
+            headers={"Content-Type": "application/json"},
+        )
 
-        if (answer.status_code != 204 and answer.status_code != 200):
+        if answer.status_code != 204 and answer.status_code != 200:
             raise Exception(
-                "Webhook message could not be sent! Please check your webhook URL and message and try again.")
+                "Webhook message could not be sent! Please check your webhook URL and message and try again."
+            )
         else:
             return "Webhook message sent successfully!"
 
-    def _arun(self, webhook_message: str, webhook_url: str,
-              webhook_username: str): raise NotImplementedError("This tool does not support async")
+    def _arun(self, webhook_message: str, webhook_url: str, webhook_username: str):
+        raise NotImplementedError("This tool does not support async")
