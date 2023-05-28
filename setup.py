@@ -4,11 +4,13 @@ setup(
     # How you named your package folder (MyLib)
     name="langchain_discord",
     packages=["langchain_discord"],  # Chose the same as "name"
-    version="1.0.2",  # Start with a small number and increase it with every change you make
+    version=
+    "1.0.2",  # Start with a small number and increase it with every change you make
     # Chose a license from here: https://help.github.com/articles/licensing-a-repository
     license="MIT",
     # Give a short description about your library
-    description="This package offers some easy-to-use tools to integrate Discord into LangChain for agents.",
+    description=
+    "This package offers some easy-to-use tools to integrate Discord into LangChain for agents.",
     author="Lennard Dorst",  # Type in your name
     author_email="lennardsolana@gmail.com",  # Type in your E-Mail
     # Provide either the link to your github or to your website

@@ -42,11 +42,15 @@ class DiscordWebhookTool(BaseTool):
             raise ValueError("WEBHOOK_URL environment variable not set")
 
         WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
-        WEBHOOK_USERNAME = os.environ.get("WEBHOOK_USERNAME", "LangChain Agent")
+        WEBHOOK_USERNAME = os.environ.get("WEBHOOK_USERNAME",
+                                          "LangChain Agent")
 
         answer = requests.post(
             WEBHOOK_URL,
-            json={"content": webhook_message, "username": WEBHOOK_USERNAME},
+            json={
+                "content": webhook_message,
+                "username": WEBHOOK_USERNAME
+            },
             headers={"Content-Type": "application/json"},
         )
 
@@ -57,5 +61,6 @@ class DiscordWebhookTool(BaseTool):
         else:
             return "Webhook message sent successfully!"
 
-    def _arun(self, webhook_message: str, webhook_url: str, webhook_username: str):
+    def _arun(self, webhook_message: str, webhook_url: str,
+              webhook_username: str):
         raise NotImplementedError("This tool does not support async")
